@@ -1,0 +1,8 @@
+- if flash[:error]
+  javascript:
+  	data = "#{flash[:error]}"
+  	M.toast({html: data, classes: "red"})
+- if flash[:notice]
+  javascript:
+  	data = "#{flash[:notice]}"
+  	M.toast({html: data, classes: "teal lighten-2"})
