@@ -9,4 +9,4 @@ test:
 
 production:
   API_URL: https://music-share-api-2696.herokuapp.com
-  APP_URL: hhttps://music-share-2696.herokuapp.com
+  APP_URL: https://music-share-2696.herokuapp.com
