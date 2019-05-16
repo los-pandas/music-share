@@ -6,3 +6,7 @@ development:
 test:
   API_URL: http://localhost:3000/api/v1
   APP_URL: http://localhost:9292
+
+production:
+  API_URL: https://music-share-api-2696.herokuapp.com/
+  APP_URL: hhttps://music-share-2696.herokuapp.com/
