@@ -17,14 +17,24 @@ gem 'pry'
 
 # Communication
 gem 'http'
+gem 'redis'
+gem 'redis-rack'
 
 # Security
+gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
 
 # Development
 group :development do
   gem 'rubocop'
   gem 'rubocop-performance'
+end
+
+# Testing
+group :test do
+  gem 'minitest'
+  gem 'minitest-rg'
+  gem 'webmock'
 end
 
 group :development, :test do
