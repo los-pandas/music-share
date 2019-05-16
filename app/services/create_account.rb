@@ -17,7 +17,7 @@ module MusicShare
                   password: password }
 
       response = HTTP.post(
-        "#{@config.API_URL}/account/",
+        "#{@config.API_URL}/account",
         json: message
       )
 
