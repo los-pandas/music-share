@@ -19,10 +19,7 @@ nav
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
               = "#{@current_account.username}" 
               / i class="material-icons right" arrow_drop_down
-            javascript:
-              $(".dropdown-trigger").dropdown({
-                coverTrigger: false
-              });
+            
       -else
         li
           a href='/auth/login' Login

@@ -7,7 +7,8 @@ module MusicShare
   # Base class for MusicShare Web Application
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/presentation/views'
-    plugin :assets, css: 'style.css', path: 'app/presentation/assets'
+    plugin :assets, path: 'app/presentation/assets', css: 'style.css',
+                    js: 'script.js'
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
     plugin :flash
