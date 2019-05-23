@@ -1,0 +1,15 @@
+div class="row"
+div class="row"
+div class="row"
+    div class="col s6 offset-s3"
+        h1 class="center-align teal-text lighten-2" Playlists
+        br
+        - playlists.all.each do |playlist|
+            div class="card-panel white"
+              div class="card-content teal-text lighten-2"
+                h6 class="left-align" == playlist.title
+                p Description: == playlist.description
+                - if playlist.songs.length > 0
+                  p Songs:
+                  - playlist.songs.each do |song|
+                      p #{song.title}, #{song.artists}

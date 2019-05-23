@@ -8,7 +8,8 @@ describe 'Test Service Objects' do # rubocop:disable BlockLength
     @credentials = { username: 'xavier', password: '12345678' }
     @mal_credentials = { username: 'xavier', password: 'wrongpassword' }
     @api_account = { attributes:
-                       { username: 'xavier', email: 'xavier@nthu.edu.tw' } }
+                      { account:
+                        { username: 'xavier', email: 'xavier@nthu.edu.tw' } } }
   end
 
   after do

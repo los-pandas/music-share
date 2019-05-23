@@ -1,0 +1,26 @@
+div class="row"
+div class="row"
+div class="row"
+    div class="col s4 offset-s4"
+      div class="card-panel white"
+        div class="card-content teal-text lighten-2"
+          h3 class="center-align" Create a new account
+          br
+          form action='/account/#{registration_token}' method='post' id='user-form'
+            div class="form-group"
+              label for='input-username' Username
+              input type='text' value="#{new_account['username']}" readonly=true
+            div class="form-group"
+              label for='email_input' Email
+              input type='email' value="#{new_account['email']}" class="form-control" readonly=true
+            div class="form-group"
+              label for='input-password' Password
+              input type='password' name='password' id='password_input' class="form-control"
+            div class="form-group"
+              label for='input-password-confirm' Confirm Password
+              input type='password' name='password_confirm' id='password_confirm_input' class="form-control"
+            br
+            br
+            div class="center-align"
+              button type='submit' id='registration-form-submit' class='submit waves-effect waves-light btn teal lighten-2' value='submit' class="btn btn-primary btn-block" Register
+        div class="col-sm-4"

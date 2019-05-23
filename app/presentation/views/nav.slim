@@ -1,8 +1,8 @@
 / Nav with dropdown
-- if @current_account
+- if @current_account.logged_in?
   ul id="dropdown1" class="dropdown-content"
     li
-      a href="/account/#{@current_account['username']}" Account 
+      a href="/account/#{@current_account.username}" Account 
     li class="divider"
     li
       a href='/auth/logout' Logout 
@@ -11,18 +11,15 @@ nav
     a href="/" class="brand-logo"
       img src="/logo.png" style="max-height:50px; margin-left: 10px; margin-right: 10px; vertical-align: middle" Music Share
     ul class="right hide-on-med-and-down"
-      - if @current_account
+      - if @current_account.logged_in?
           li
-            a href="/" Playlists
+            a href="/playlists" Playlists
           / Dropdown
           li
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
-              = "#{@current_account['username']}" 
+              = "#{@current_account.username}" 
               / i class="material-icons right" arrow_drop_down
-            javascript:
-              $(".dropdown-trigger").dropdown({
-                coverTrigger: false
-              });
+            
       -else
         li
           a href='/auth/login' Login
