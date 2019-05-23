@@ -17,7 +17,12 @@ module MusicShare
       raise(UnauthorizedError) if response.code == 403
       raise if response.code != 200
 
-      response.parse['attributes']
+      account_info = response.parse['attributes']
+
+      {
+        account: account_info['account']['attributes'],
+        auth_token: account_info['auth_token']
+      }
     end
   end
 end
