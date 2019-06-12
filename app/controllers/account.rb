@@ -18,9 +18,16 @@ module MusicShare
         end
         # POST /account/<token>
         routing.post String do |registration_token|
-          raise 'Passwords do not match or empty' if
-            routing.params['password'].empty? ||
-            routing.params['password'] != routing.params['password_confirm']
+          passwords = Form::Passwords.call(routing.params)
+          if passwords.failure?
+            flash[:error] = Form.validation_errors(passwords)
+            routing.redirect(
+              "#{App.config.APP_URL}/auth/register/#{registration_token}"
+            )
+          end
+          # raise 'Passwords do not match or empty' if
+          #  routing.params['password'].empty? ||
+          #  routing.params['password'] != routing.params['password_confirm']
 
           new_account = SecureMessage.decrypt(registration_token)
           CreateAccount.new(App.config).call(

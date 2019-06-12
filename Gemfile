@@ -12,6 +12,11 @@ gem 'slim'
 gem 'econfig'
 gem 'rake'
 
+# Security
+gem 'dry-validation'
+gem 'rack-ssl-enforcer'
+gem 'rbnacl' # assumes libsodium package already installed
+
 # Debugging
 gem 'pry'
 gem 'rack-test'
@@ -20,10 +25,6 @@ gem 'rack-test'
 gem 'http'
 gem 'redis'
 gem 'redis-rack'
-
-# Security
-gem 'rack-ssl-enforcer'
-gem 'rbnacl' # assumes libsodium package already installed
 
 # Development
 group :development do

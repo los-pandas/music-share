@@ -4,6 +4,26 @@
   display:block;
 }
 
+.h-divider{
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+.inline-button{
+  display:inline-block;
+}
+
+.display-flex-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.fixed-button{
+    bottom: 12%;
+    right: 26%;
+}
+
 #toast-container {
   min-width: 10%;
   bottom: 20%;

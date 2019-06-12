@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module MusicShare
   # Base class for MusicShare Web Application
