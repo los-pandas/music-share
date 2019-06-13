@@ -3,4 +3,5 @@ $( document ).ready(function(){
                 coverTrigger: false
               });
 	$('.modal').modal();
+	$('.collapsible').collapsible();
 });
