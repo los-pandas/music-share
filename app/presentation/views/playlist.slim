@@ -1,0 +1,21 @@
+div class="row"
+div class="row"
+div class="row"
+    div class="col s6 offset-s3"
+        h1 class="center-align teal-text lighten-2" == playlist.title
+        div class="right-align"
+          - if playlist.policies.can_edit
+            a class="waves-effect waves-light btn lighten-2 inline-button" Edit
+          div class="h-divider"
+          - if playlist.policies.can_delete
+            a class="waves-effect waves-light btn lighten-2 inline-button" Delete
+        br
+          div class="card-panel white"
+            div class="card-content teal-text lighten-2"
+              p == playlist.description
+              - if playlist.songs.length > 0
+                p Songs:
+                - playlist.songs.each do |song|
+                  div class="display-flex-div"
+                    p #{song.title} by #{song.artists}
+                    p #{song.duration_seconds}

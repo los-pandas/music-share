@@ -8,7 +8,7 @@ module MusicShare
   class App < Roda
     route('auth') do |routing| # rubocop:disable BlockLength
       @login_route = '/auth/login'
-      routing.is 'login' do
+      routing.is 'login' do # rubocop:disable BlockLength
         # GET /auth/login
         routing.get do
           view :login
@@ -16,15 +16,17 @@ module MusicShare
 
         # POST /auth/login
         routing.post do
-          account_info = AuthenticateAccount.new(App.config).call(
-            username: routing.params['username'],
-            password: routing.params['password']
-          )
-          current_account = CurrentAccount.new(
-            account_info[:account],
-            account_info[:auth_token]
-          )
+          credentials = Form::LoginCredentials.call(routing.params)
+          if credentials.failure?
+            flash[:error] = 'Please enter both username and password'
+            routing.redirect @login_route
+          end
+          authenticated = AuthenticateAccount.new(App.config).call(credentials)
 
+          current_account = Account.new(
+            authenticated[:account],
+            authenticated[:auth_token]
+          )
           CurrentSession.new(session).current_account = current_account
 
           flash[:notice] = "Welcome back #{current_account.username}!"
@@ -50,7 +52,7 @@ module MusicShare
       end
 
       @register_route = '/auth/register'
-      routing.on 'register' do
+      routing.on 'register' do # rubocop:disable BlockLength
         routing.is do
           # GET /auth/register
           routing.get do
@@ -59,9 +61,13 @@ module MusicShare
 
           # POST /auth/register
           routing.post do
-            account_data = JsonRequestBody.symbolize(routing.params)
-            VerifyRegistration.new(App.config).call(account_data)
+            registration = Form::Registration.call(routing.params)
 
+            if registration.failure?
+              flash[:error] = Form.validation_errors(registration)
+              routing.redirect @register_route
+            end
+            VerifyRegistration.new(App.config).call(registration)
             flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'
           rescue StandardError => e

@@ -1,0 +1,19 @@
+div id="newPlaylistModal" class="modal"
+  div class="modal-content"
+    h4 New Playlist
+    form role="form" action="/playlists" method='post' id='new-playlist-form'
+        div class="form-group"
+          label for='name_input' Playlist Title:
+          input type='text' name='title' id='title_input' class="form-control" placeholder="title is required"
+        div class="form-group"
+          label for='descriptionn_input' Description:
+          input type='text' name='description' id='description_input' class="form-control" 
+        div class="switch form-group"
+          p Private
+          label
+            input type="checkbox" name="is_private" id="is_private_input" class="form-control"
+            span class="lever"
+        div class="center-align"
+          button type='submit' id='registration-form-submit' class='submit' value='submit' class="waves-effect waves-light btn teal lighten-2" Create
+          div class="h-divider"
+          button type="button" class="waves-effect waves-light btn red lighten-2 modal-close" Cancel
