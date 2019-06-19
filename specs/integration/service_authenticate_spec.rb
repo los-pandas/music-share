@@ -43,7 +43,7 @@ describe 'Test Service Objects' do # rubocop:disable BlockLength
              .to_return(status: 403)
       proc {
         MusicShare::AuthenticateAccount.new(app.config).call(@mal_credentials)
-      }.must_raise MusicShare::AuthenticateAccount::UnauthorizedError
+      }.must_raise MusicShare::AuthenticateAccount::NotAuthenticatedError
     end
   end
 end
