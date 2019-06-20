@@ -13,13 +13,17 @@ nav
     ul class="right hide-on-med-and-down"
       - if @current_account.logged_in?
           li
-            a href="/playlists" Playlists
+            a href="/" Public Playlists
+          li
+            a href="/search" Songs
+          li
+            a href="/playlists" My Playlists
           / Dropdown
           li
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
               = "#{@current_account.username}" 
               / i class="material-icons right" arrow_drop_down
-            
+          
       -else
         li
           a href='/auth/login' Login

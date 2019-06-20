@@ -23,7 +23,11 @@ module MusicShare
 
       # GET /
       routing.root do
-        view 'home', locals: { current_account: @current_account }
+        playlist_list = GetPublicPlaylists.new(App.config)
+                                           .call(@current_account)
+
+        playlists = Playlists.new(playlist_list)
+        view 'home', locals: { current_account: @current_account, playlists: playlists }
       end
     end
   end

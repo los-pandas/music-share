@@ -5,7 +5,15 @@ div class="row"
       div class="card-panel white"
         div class="card-content teal-text lighten-2"
           h1 class="center-align" Music Share 
-          p class="flow-text" Welcome to Music Share! Here you can share your playlists with friends between different music platforms like Spotify and Youtube!
+          p class="flow-text" Welcome to Music Share! Here you can share your playlists with friends between different music platforms like Spotify!
       	- unless current_account
           div class="card-action center-align"
           	a href="/auth/login" class="waves-effect waves-light btn teal lighten-2"  Login
+        - if current_account
+        	h1 class="center-align teal-text lighten-2" Playlists
+        	br
+        	- playlists.all.each do |playlist|
+            	div class="card-panel white"
+              		div class="card-content teal-text lighten-2"
+                		a href="/playlists/#{playlist.id}"
+                  			h6 class="left-align teal-text lighten-2" == playlist.title

@@ -5,22 +5,15 @@ require_relative './app'
 
 module MusicShare
   # Web controller for MusicShare API
-  class App < Roda
-    def gh_oauth_url(config)
-      url = config.GH_OAUTH_URL
-      client_id = config.GH_CLIENT_ID
-      scope = config.GH_SCOPE
-
-      "#{url}?client_id=#{client_id}&scope=#{scope}"
-    end
+  class App < Roda # rubocop:disable ClassLength
     route('auth') do |routing| # rubocop:disable BlockLength
-      @oauth_callback = '/auth/sso_callback'
       @login_route = '/auth/login'
       routing.is 'login' do # rubocop:disable BlockLength
         # GET /auth/login
         routing.get do
           view :login, locals: {
-            gh_oauth_url: gh_oauth_url(App.config)
+            gh_oauth_url: CreateSSOURL.new(App.config).gh_oauth_url,
+            sp_oauth_url: CreateSSOURL.new(App.config).sp_oauth_url
           }
         end
 
@@ -53,12 +46,12 @@ module MusicShare
         end
       end
 
-      routing.is 'sso_callback' do
-        # GET /auth/sso_callback
+      # routing.is 'sso_callback' do # rubocop:disable BlockLength
+      # GET /auth/sso_callback
+      routing.is 'sso_callback/github' do
         routing.get do
-          authorized = AuthorizeGithubAccount
-                       .new(App.config)
-                       .call(routing.params['code'])
+          authorized = AuthorizeGithubAccount.new(App.config)
+                                             .call(routing.params['code'])
 
           current_account = Account.new(
             authorized[:account],
@@ -80,6 +73,32 @@ module MusicShare
           routing.redirect @login_route
         end
       end
+      routing.is 'sso_callback/spotify' do
+        routing.get do
+          authorized = AuthorizeSpotifyAccount.new(App.config)
+                                              .call(routing.params)
+
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
+
+          CurrentSession.new(session).current_account = current_account
+
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/playlists'
+        rescue AuthorizeSpotifyAccount::UnauthorizedError
+          flash[:error] = 'Could not login with spotify'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
+          response.status = 500
+          routing.redirect @login_route
+        end
+      end
+      # end
 
       routing.on 'logout' do
         routing.get do
