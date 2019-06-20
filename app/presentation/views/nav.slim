@@ -13,9 +13,11 @@ nav
     ul class="right hide-on-med-and-down"
       - if @current_account.logged_in?
           li
+            a href="/" Public Playlists
+          li
             a href="/search" Songs
           li
-            a href="/playlists" Playlists
+            a href="/playlists" My Playlists
           / Dropdown
           li
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
