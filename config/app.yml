@@ -5,6 +5,10 @@ development:
   GH_OAUTH_URL: https://github.com/login/oauth/authorize
   GH_TOKEN_URL: https://github.com/login/oauth/access_token
   GH_SCOPE: user:email
+  SP_OAUTH_URL: https://accounts.spotify.com/authorize?
+  SP_TOKEN_URL: https://accounts.spotify.com/api/token
+  SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
+  SP_REDIRECT_URL: http://localhost:9292/auth/sso_callback/spotify
 
 test:
   API_URL: http://localhost:3000/api/v1
@@ -12,6 +16,10 @@ test:
   GH_OAUTH_URL: https://github.com/login/oauth/authorize
   GH_TOKEN_URL: https://github.com/login/oauth/access_token
   GH_SCOPE: user:email
+  SP_OAUTH_URL: https://accounts.spotify.com/authorize?
+  SP_TOKEN_URL: https://accounts.spotify.com/api/token
+  SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
+  SP_REDIRECT_URL: http://localhost:9292/auth/sso_callback/spotify
 
 production:
   API_URL: https://music-share-api-2696.herokuapp.com/api/v1
@@ -19,3 +27,7 @@ production:
   GH_OAUTH_URL: https://github.com/login/oauth/authorize
   GH_TOKEN_URL: https://github.com/login/oauth/access_token
   GH_SCOPE: user:email
+  SP_OAUTH_URL: https://accounts.spotify.com/authorize?
+  SP_TOKEN_URL: https://accounts.spotify.com/api/token
+  SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
+  SP_REDIRECT_URL: https://music-share-2696.herokuapp.com/auth/sso_callback/spotify

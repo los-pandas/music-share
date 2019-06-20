@@ -40,7 +40,7 @@ module MusicShare
                         .then { |sso_info| SignedMessage.sign(sso_info) }
 
       response = HTTP.post(
-        "#{@config.API_URL}/auth/sso",
+        "#{@config.API_URL}/auth/sso/github",
         json: signed_sso_info
       )
       raise if response.code >= 400

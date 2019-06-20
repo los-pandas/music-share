@@ -25,5 +25,13 @@ module MusicShare
     def logged_in?
       !logged_out?
     end
+
+    def logged_in_spotify?
+      !@account_info['spotify_token'].nil?
+    end
+
+    def spotify_token
+      @account_info ? @account_info['spotify_token']['token'] : nil
+    end
   end
 end

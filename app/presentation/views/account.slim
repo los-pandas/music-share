@@ -12,6 +12,9 @@ div class="row"
     	  		p Email:
     	  		p == account.email
                 br
+                - if account.logged_in_spotify?
+                p Logged into spotify
+                br
                 p API Key:
                 ul class="collapsible"
                     li
