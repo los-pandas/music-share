@@ -12,8 +12,9 @@ module MusicShare
     end
 
     def call(username:, password:)
+      credentials = { username: username, password: password }
       response = HTTP.post("#{@config.API_URL}/auth/authenticate",
-                           json: { username: username, password: password })
+                           json: SignedMessage.sign(credentials))
       raise(NotAuthenticatedError) if response.code == 401
 
       raise(NotAuthenticatedError) if response.code != 200

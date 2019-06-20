@@ -23,7 +23,7 @@ module MusicShare
 
       response = HTTP.post(
         "#{@config.API_URL}/account",
-        json: message
+        json: SignedMessage.sign(message)
       )
 
       raise InvalidAccount unless response.code == 201
