@@ -9,6 +9,7 @@ development:
   SP_TOKEN_URL: https://accounts.spotify.com/api/token
   SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
   SP_REDIRECT_URL: http://localhost:9292/auth/sso_callback/spotify
+  SP_SEARCH_URL: https://api.spotify.com/v1/search
 
 test:
   API_URL: http://localhost:3000/api/v1
@@ -20,6 +21,7 @@ test:
   SP_TOKEN_URL: https://accounts.spotify.com/api/token
   SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
   SP_REDIRECT_URL: http://localhost:9292/auth/sso_callback/spotify
+  SP_SEARCH_URL: https://api.spotify.com/v1/search
 
 production:
   API_URL: https://music-share-api-2696.herokuapp.com/api/v1
@@ -31,3 +33,4 @@ production:
   SP_TOKEN_URL: https://accounts.spotify.com/api/token
   SP_SCOPE: user-read-private user-read-email playlist-modify-public playlist-modify-private
   SP_REDIRECT_URL: https://music-share-2696.herokuapp.com/auth/sso_callback/spotify
+  SP_SEARCH_URL: https://api.spotify.com/v1/search

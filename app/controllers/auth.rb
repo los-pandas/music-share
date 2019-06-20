@@ -46,59 +46,59 @@ module MusicShare
         end
       end
 
-      #routing.is 'sso_callback' do # rubocop:disable BlockLength
-        # GET /auth/sso_callback
-        routing.is 'sso_callback/github' do
-          routing.get do
-            authorized = AuthorizeGithubAccount.new(App.config)
-                                               .call(routing.params['code'])
+      # routing.is 'sso_callback' do # rubocop:disable BlockLength
+      # GET /auth/sso_callback
+      routing.is 'sso_callback/github' do
+        routing.get do
+          authorized = AuthorizeGithubAccount.new(App.config)
+                                             .call(routing.params['code'])
 
-            current_account = Account.new(
-              authorized[:account],
-              authorized[:auth_token]
-            )
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
 
-            CurrentSession.new(session).current_account = current_account
+          CurrentSession.new(session).current_account = current_account
 
-            flash[:notice] = "Welcome #{current_account.username}!"
-            routing.redirect '/playlists'
-          rescue AuthorizeGithubAccount::UnauthorizedError
-            flash[:error] = 'Could not login with Github'
-            response.status = 403
-            routing.redirect @login_route
-          rescue StandardError => e
-            puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
-            flash[:error] = 'Unexpected API Error'
-            response.status = 500
-            routing.redirect @login_route
-          end
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/playlists'
+        rescue AuthorizeGithubAccount::UnauthorizedError
+          flash[:error] = 'Could not login with Github'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
+          response.status = 500
+          routing.redirect @login_route
         end
-        routing.is 'sso_callback/spotify' do
-          routing.get do
-            authorized = AuthorizeSpotifyAccount.new(App.config)
-                                                .call(routing.params)
+      end
+      routing.is 'sso_callback/spotify' do
+        routing.get do
+          authorized = AuthorizeSpotifyAccount.new(App.config)
+                                              .call(routing.params)
 
-            current_account = Account.new(
-              authorized[:account],
-              authorized[:auth_token]
-            )
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
 
-            CurrentSession.new(session).current_account = current_account
+          CurrentSession.new(session).current_account = current_account
 
-            flash[:notice] = "Welcome #{current_account.username}!"
-            routing.redirect '/playlists'
-          rescue AuthorizeSpotifyAccount::UnauthorizedError
-            flash[:error] = 'Could not login with spotify'
-            response.status = 403
-            routing.redirect @login_route
-          rescue StandardError => e
-            puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
-            flash[:error] = 'Unexpected API Error'
-            response.status = 500
-            routing.redirect @login_route
-          end
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/playlists'
+        rescue AuthorizeSpotifyAccount::UnauthorizedError
+          flash[:error] = 'Could not login with spotify'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
+          response.status = 500
+          routing.redirect @login_route
         end
-      #end
+      end
+      # end
 
       routing.on 'logout' do
         routing.get do
