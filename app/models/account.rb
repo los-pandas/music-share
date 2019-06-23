@@ -14,6 +14,10 @@ module MusicShare
       @account_info ? @account_info['attributes']['username'] : nil
     end
 
+    def display_name
+      @account_info ? @account_info['attributes']['display_name'] : username
+    end
+
     def email
       @account_info ? @account_info['attributes']['email'] : nil
     end

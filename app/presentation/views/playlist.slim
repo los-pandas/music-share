@@ -5,10 +5,14 @@ div class="row"
         h1 class="center-align teal-text lighten-2" == playlist.title
         div class="right-align"
           - if playlist.policies.can_edit
-            a class="waves-effect waves-light btn lighten-2 inline-button" Edit
+            a class="waves-effect waves-light btn lighten-2 inline-button modal-trigger" data-toggle="modal" data-target="updatePlaylistModal" Edit
           div class="h-divider"
           - if playlist.policies.can_delete
-            a class="waves-effect waves-light btn lighten-2 inline-button" Delete
+            form role="form" action="/playlists/delete/#{playlist.id}" method='post' id='delete-playlist-form'
+              button class="waves-effect waves-light btn lighten-2 inline-button red submit" value='submit' type='submit' Delete
+          - if playlist.policies.can_export
+            form role="form" action="/playlists/export/#{playlist.id}" method='post' id='export-playlist-form'
+              button class="waves-effect waves-light btn lighten-2 inline-button submit" value='submit' type='submit' Export To Spotify
         br
           div class="card-panel white"
             div class="card-content teal-text lighten-2"
@@ -18,4 +22,5 @@ div class="row"
                 - playlist.songs.each do |song|
                   div class="display-flex-div"
                     p #{song.title} by #{song.artists}
-                    p #{song.duration_seconds}
+                    p Duration: #{song.duration_seconds/60}:#{song.duration_seconds%60}
+include :update_playlist_partial

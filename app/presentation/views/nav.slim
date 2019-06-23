@@ -21,11 +21,9 @@ nav
           / Dropdown
           li
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
-              = "#{@current_account.username}" 
+              = "#{@current_account.display_name}" 
               / i class="material-icons right" arrow_drop_down
           
       -else
         li
           a href='/auth/login' Login
-        li
-          a href='/auth/register' Register

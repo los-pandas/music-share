@@ -1,0 +1,19 @@
+div id="updatePlaylistModal" class="modal"
+  div class="modal-content"
+    h4 Update Playlist
+    form role="form" action="/playlists/update/#{playlist.id}" method='post' id='update-playlist-form'
+        div class="form-group"
+          label for='name_input' Playlist Title:
+          input type='text' name='title' id='title_input_update' class="form-control" value = playlist.title
+        div class="form-group"
+          label for='descriptionn_input' Description:
+          input type='text' name='description' id='description_input_update' class="form-control" value = playlist.description
+        div class="switch form-group"
+          p Private
+          label
+            input type="checkbox" name="is_private" id="is_private_input_update" class="form-control" checked = playlist.is_private
+            span class="lever"
+        div class="center-align"
+          button type='submit' id='update-form-submit' class='submit' value='submit' class="waves-effect waves-light btn teal lighten-2" Update
+          div class="h-divider"
+          button type="button" class="waves-effect waves-light btn red lighten-2 modal-close" Cancel
