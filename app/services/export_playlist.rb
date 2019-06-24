@@ -18,7 +18,8 @@ class ExportPlaylist
 
   def call(current_account:, playlist:)
     response = export_playlist(current_account, playlist)
-    export_songs(current_account, response.parse['id'], playlist) unless playlist.songs.length < 1
+    export_songs(current_account, response.parse['id'], playlist)\
+    unless playlist.songs.empty?
   end
 
   def export_playlist(current_account, playlist)
