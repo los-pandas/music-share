@@ -13,6 +13,8 @@ nav
     ul class="right hide-on-med-and-down"
       - if @current_account.logged_in?
           li
+            a href="/playlists/shared" Playlists Shared with me
+          li
             a href="/" Public Playlists
           li
             a href="/search" Songs
@@ -21,11 +23,9 @@ nav
           / Dropdown
           li
             a class="dropdown-trigger" href="#!" data-target="dropdown1" 
-              = "#{@current_account.username}" 
+              = "#{@current_account.display_name}" 
               / i class="material-icons right" arrow_drop_down
           
       -else
         li
           a href='/auth/login' Login
-        li
-          a href='/auth/register' Register

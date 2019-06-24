@@ -9,7 +9,7 @@ div class="row"
               div class="card-content teal-text lighten-2"
                 h6 class="left-align teal-text lighten-2" == song.title
                 p class="left-align teal-text lighten-2" == song.artists
-                p class="left-align teal-text lighten-2" == song.duration_seconds
+                p class="left-align teal-text lighten-2" Duration: #{song.duration_seconds/60}:#{song.duration_seconds%60}
                 a href=song.external_url == song.external_url
                 br
                 button value="#{song.to_json}" onclick='song_selected(this.value)' class="waves-effect waves-light btn teal lighten-2 modal-trigger" data-toggle="modal" data-target="addToPlaylistModal" Add to playlist

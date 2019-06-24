@@ -1,0 +1,11 @@
+div id="addSharedAccountModal" class="modal"
+  div class="modal-content"
+    h4 share Playlist
+    form role="form" action="/playlists/shared/#{playlist.id}" method='post' id='new-shared-account-form'
+        div class="form-group"
+          label for='email_input' Email address:
+          input type='text' name='email' id='email_input' class="form-control" placeholder="Email of shared account"
+        div class="center-align"
+          button type='submit' id='add-shared-account-form-submit' class='submit' value='submit' class="waves-effect waves-light btn teal lighten-2" Add
+          div class="h-divider"
+          button type="button" class="waves-effect waves-light btn red lighten-2 modal-close" Cancel

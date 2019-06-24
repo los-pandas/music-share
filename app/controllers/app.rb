@@ -13,6 +13,7 @@ module MusicShare
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
     plugin :flash
+    plugin :all_verbs
 
     route do |routing|
       @current_account = CurrentSession.new(session).current_account
@@ -25,15 +26,14 @@ module MusicShare
       routing.root do
         if @current_account.logged_in?
           playlist_list = GetPublicPlaylists.new(App.config)
-                                           .call(@current_account)
+                                            .call(@current_account)
 
           playlists = Playlists.new(playlist_list)
-          view 'home', locals: { current_account: @current_account, playlists: playlists }
         else
           playlists = Playlists.new([])
-          view 'home', locals: { current_account: @current_account, playlists: playlists }
         end
-        
+        view 'home', locals: { current_account: @current_account,
+                               playlists: playlists }
       end
     end
   end

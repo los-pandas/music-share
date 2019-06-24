@@ -5,8 +5,8 @@ require 'roda'
 module MusicShare
   # Web controller for MusicShare
   class App < Roda
-    route('songs') do |routing|
-      routing.on do
+    route('songs') do |routing| # rubocop:disable BlockLength
+      routing.on do # rubocop:disable BlockLength
         @playlists_route = '/playlists'
         routing.redirect '/auth/login' unless @current_account.logged_in?
 
@@ -15,7 +15,6 @@ module MusicShare
           # call api to get local songs
           song_list = GetSongs.new(App.config)
                               .call(@current_account, query)
-          # puts song_list
           songs = Songs.new(song_list)
           playlist_list = GetAllPlaylists.new(App.config)
                                          .call(@current_account)

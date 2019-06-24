@@ -23,7 +23,8 @@ module MusicShare
       scope = @config.SP_SCOPE
       redirect_uri = @config.SP_REDIRECT_URL
 
-      "#{url}response_type=code&client_id=#{client_id}&scope=#{scope}&redirect_uri=#{redirect_uri}&state=spotify_auth_state"
+      "#{url}response_type=code&client_id=#{client_id}&scope=#{scope}\
+      &redirect_uri=#{redirect_uri}&state=spotify_auth_state"
     end
   end
 end

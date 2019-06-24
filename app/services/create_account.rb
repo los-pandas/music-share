@@ -19,7 +19,8 @@ module MusicShare
     def call(email:, username:, password:)
       message = { email: email,
                   username: username,
-                  password: password }
+                  password: password,
+                  display_name: username }
 
       response = HTTP.post(
         "#{@config.API_URL}/account",

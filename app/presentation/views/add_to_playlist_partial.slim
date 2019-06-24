@@ -2,13 +2,17 @@ div id="addToPlaylistModal" class="modal"
   div class="modal-content"
     h4 Select Playlist
     - playlists.all.each do |playlist|
-      p == playlist.title
-      form method='post' action='/songs/add' id='form-add_song'
-          div class="form-group" hidden=true
-            input type='text' name='playlist_id' class="form-control" value=playlist.id
-          div class="form-group" hidden=true
-            input type='text' class='song_input' name='song_data' class="form-control"
-          div class="center-align"
-          button type='submit' class="waves-effect waves-light btn teal lighten-2" Add
-    div class="h-divider"
+      div
+        p style="display: inline" == playlist.title
+        div class="h-divider"
+        div class="h-divider"
+        form method='post' action='/songs/add' id='form-add_song' style="display: inline"
+            div class="form-group" hidden=true
+              input type='text' name='playlist_id' class="form-control" value=playlist.id
+            div class="form-group" hidden=true
+              input type='text' class='song_input' name='song_data' class="form-control"
+            button type='submit' class="waves-effect waves-light btn teal lighten-2" Add
+            br
+    br
+    div class="center-align"
       button type="button" class="waves-effect waves-light btn red lighten-2 modal-close" Cancel

@@ -32,7 +32,7 @@ module MusicShare
           )
           CurrentSession.new(session).current_account = current_account
 
-          flash[:notice] = "Welcome back #{current_account.username}!"
+          flash[:notice] = "Welcome back #{current_account.display_name}!"
           routing.redirect '/playlists'
         rescue AuthenticateAccount::NotAuthenticatedError
           flash[:error] = 'Username and password did not match our records'
@@ -46,7 +46,6 @@ module MusicShare
         end
       end
 
-      # routing.is 'sso_callback' do # rubocop:disable BlockLength
       # GET /auth/sso_callback
       routing.is 'sso_callback/github' do
         routing.get do
@@ -60,7 +59,7 @@ module MusicShare
 
           CurrentSession.new(session).current_account = current_account
 
-          flash[:notice] = "Welcome #{current_account.username}!"
+          flash[:notice] = "Welcome #{current_account.display_name}!"
           routing.redirect '/playlists'
         rescue AuthorizeGithubAccount::UnauthorizedError
           flash[:error] = 'Could not login with Github'
@@ -85,7 +84,7 @@ module MusicShare
 
           CurrentSession.new(session).current_account = current_account
 
-          flash[:notice] = "Welcome #{current_account.username}!"
+          flash[:notice] = "Welcome #{current_account.display_name}!"
           routing.redirect '/playlists'
         rescue AuthorizeSpotifyAccount::UnauthorizedError
           flash[:error] = 'Could not login with spotify'

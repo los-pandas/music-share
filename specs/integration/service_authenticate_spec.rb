@@ -17,7 +17,7 @@ describe 'Test Service Objects' do # rubocop:disable BlockLength
   end
 
   describe 'Find authenticated account' do # rubocop:disable BlockLength
-    it 'HAPPY: should find an authenticated account' do
+    it 'HAPPY AUTHENTCATION: should find an authenticated account' do
       auth_return = { 'data' => {
         'attributes' => {
           'account' => @api_account,
@@ -37,7 +37,7 @@ describe 'Test Service Objects' do # rubocop:disable BlockLength
       _(account['email']).must_equal @api_account[:attributes][:email]
     end
 
-    it 'BAD: should not find a false authenticated account' do
+    it 'BAD AUTHENTICATION: should not find a false authenticated account' do
       WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
              .with(body: SignedMessage.sign(@mal_credentials).to_json)
              .to_return(status: 403)
