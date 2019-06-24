@@ -61,7 +61,10 @@ module MusicShare
         rescue StandardError => e
           puts "#{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Error while exporting playlist'
+        ensure
+          routing.redirect "#{@playlists_route}/#{playlist_id}"
         end
+        
       end
       routing.on do # rubocop:disable BlockLength
         routing.redirect '/auth/login' unless @current_account.logged_in?
