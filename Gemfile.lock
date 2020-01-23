@@ -90,7 +90,7 @@ GEM
       rubocop (>= 0.67.0)
     ruby-progressbar (1.10.0)
     safe_yaml (1.0.5)
-    secure_headers (6.1.0)
+    secure_headers (6.3.0)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
